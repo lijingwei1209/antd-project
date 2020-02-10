@@ -1,17 +1,18 @@
- {
+/*  {
+    
     "presets": [
         [
-          "@babel/preset-env",
-          {
-            "modules": false,
-            "corejs": "3",
-            "useBuiltIns": "usage"
-          }
-        ],
-        "@babel/preset-react"
-      ],
-    "plugins": [["@babel/plugin-transform-runtime"],
-        ["@babel/plugin-proposal-class-properties"],
+            "@babel/preset-env",
+            {
+              "modules": false,
+              "corejs": "3",
+              "useBuiltIns": "usage"
+            }
+          ],
+          "@babel/preset-react"
+    ],
+    "plugins": ["@babel/plugin-transform-runtime",
+        "@babel/plugin-proposal-class-properties",
       [
           "import",
           {
@@ -22,4 +23,33 @@
       ]
   ]
   }
-  
+   */
+
+
+  { 
+    "presets": [
+    "react-app"
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ],
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": true    //这里是 true 不是 'css'
+      }
+    ]
+  ]
+}

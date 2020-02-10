@@ -81,8 +81,8 @@ module.exports = function(webpackEnv) {
   const env = getClientEnvironment(publicUrl);
 
   // common function to get style loaders
-  const getStyleLoaders = (cssOptions, preProcessor) => {
-  //const getStyleLoaders = (cssOptions, preProcessor,newOptions) => {
+const getStyleLoaders = (cssOptions, preProcessor) => {
+//const getStyleLoaders = (cssOptions, preProcessor,newOptions) => {
     const loaders = [
       isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
@@ -120,7 +120,7 @@ module.exports = function(webpackEnv) {
       },
     ].filter(Boolean);
     if (preProcessor) {
-      loaders.push(
+      /* loaders.push(
         {
           loader: require.resolve('resolve-url-loader'),
           options: {
@@ -131,10 +131,19 @@ module.exports = function(webpackEnv) {
         {
           loader: require.resolve(preProcessor),
           options: {
-            sourceMap: true,
+            sourceMap: false,
           },
         }
-      );
+      ); */
+      //定制主题
+      loaders.push({
+        loader: require.resolve(preProcessor),
+        options: {
+          sourceMap: isEnvProduction && shouldUseSourceMap,
+          modifyVars: { '@primary-color': '#f9c700' },
+          javascriptEnabled: true,
+        },
+      });
        
     }
     return loaders;
@@ -377,9 +386,9 @@ module.exports = function(webpackEnv) {
               include: paths.appSrc,
               loader: require.resolve('babel-loader'),
               options: {
-                customize: require.resolve(
-                  'babel-preset-react-app/webpack-overrides'
-                ),
+                // customize: require.resolve(
+                //   'babel-preset-react-app/webpack-overrides'
+                // ),
                 
                 plugins: [
                   [
@@ -399,7 +408,7 @@ module.exports = function(webpackEnv) {
                 // directory for faster rebuilds.
                 cacheDirectory: true,
                 // See #6846 for context on why cacheCompression is disabled
-                cacheCompression: false,
+                // cacheCompression: false,
                 compact: isEnvProduction,
               },
             },
@@ -421,12 +430,12 @@ module.exports = function(webpackEnv) {
                 ],
                 cacheDirectory: true,
                 // See #6846 for context on why cacheCompression is disabled
-                cacheCompression: false,
+                // cacheCompression: false,
                 
                 // Babel sourcemaps are needed for debugging into node_modules
                 // code.  Without the options below, debuggers like VSCode
                 // show incorrect code and set breakpoints on the wrong lines.
-                sourceMaps: shouldUseSourceMap,
+                // sourceMaps: shouldUseSourceMap,
                 inputSourceMap: shouldUseSourceMap,
                 //配置antd按需加载第二种方式
                 /* plugins:[[
