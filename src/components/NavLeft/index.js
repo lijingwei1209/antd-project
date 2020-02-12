@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Menu, Icon} from 'antd';
+import { Menu} from 'antd';
 import MenuConfig from './../../config/menuConfig'
 import './index.less'
-import MenuItem from 'antd/lib/menu/MenuItem';
 import { NavLink } from 'react-router-dom';
 const { SubMenu } = Menu;
 

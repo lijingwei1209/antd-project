@@ -1,11 +1,12 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route, Switch} from 'react-router-dom';
 import App from './App'
 import Login from './pages/login';
 import Admin from './admin';
 import Detail from './pages/detail'
 import Buttons from './pages/ui/buttons'
 import NoMatch from './pages/nomatch';
+import basicTable from './pages/table/basicTable';
 
 
 export default class IRouter extends React.Component{
@@ -18,8 +19,11 @@ export default class IRouter extends React.Component{
                     <Route path="/login" component={Login}></Route>
                     <Route path="/admin" render={()=>
                         <Admin>
+                            <Switch>
                             <Route path="/admin/ui/buttons" component={Buttons}></Route>
+                            <Route path="/admin/table/basic" component={basicTable}></Route>
                             <Route component={NoMatch}></Route>
+                            </Switch>
                         </Admin>
                     }></Route>
                     <Route path="/detail" component={Detail}></Route>
