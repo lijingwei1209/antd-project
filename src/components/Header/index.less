@@ -1,4 +1,6 @@
+@import './../../style/default.less';
 .header{
+    background-color: @colorM;
     .header-top{
         height:60px;
         line-height:60px;
@@ -15,6 +17,20 @@
          border-top: 1px solid #f9c700;
          .breadcrumb-title{
              text-align:center;
+             &:after{  //伪类实现图标
+                position: absolute;
+                content: '';  //清除浮动
+                left:50px;
+                /* width:10px;
+                height: 10px;
+                background-color:red */
+                top:39px;
+                border-top:9px solid #fff;
+                //border-right:12px solid black; //通过颜色选择器可以调整透明度，看三角形
+                //border-left:12px solid black;
+                border-left:12px solid transparent;
+                border-right:12px solid transparent;
+             }
          }
          .weather{
              font-size:14px;
