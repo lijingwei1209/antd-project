@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import{Card,Table, Modal, Button, message} from 'antd';
 import axios from './../../axios/index'
+import utils from '../../utils/utils';
 
 export default class basicTable extends Component {
     state={
         dataSource:[],
         dataSource2:[]
+    }
+    params ={
+        page:1
     }
     componentDidMount(){
         const data =[
@@ -17,7 +21,7 @@ export default class basicTable extends Component {
             }
         ]
         data.map((item,index)=>{
-            item.key= index;
+           return item.key= index;
         })
         
         this.setState({
@@ -40,30 +44,39 @@ export default class basicTable extends Component {
                 }
             }
         ) */
+       let _this = this;
+        console.log(this)
         axios.ajax({
             url:'/table/list',
             data:{
                 params:{
-                    page:1,
-                    pageSize:10
+                    page: this.params.page
                 }
             }
         }).then((res)=>{
             if(res.code === "0"){
                 res.result.list.map((item,index)=>{
-                    item.key = index;
+                   return item.key = index;
                 })
                 this.setState({
                     dataSource2: res.result.list,
                     selectedRowKeys:[],
-                    selectedRows:[]
+                    selectedRows:null,
+                    pagination:utils.pagination(res,(current)=>{
+                        console.log(this)
+                        //to-do
+                        _this.params.page = current
+                        this.params.page=current 
+                        this.request()
+                    })
+
+
                 })
             }
         })
     }
 
     onRowClick = (record,index) =>{
-        console.log('dddd')
         let selectKey = [index]; //多选就是个数组
         Modal.info({
             title:'信息',
@@ -80,7 +93,7 @@ export default class basicTable extends Component {
         let rows = this.state.selectedRows;
         let ids = [];
         rows.map((item)=>{
-            ids.push(item.id)
+           return ids.push(item.id)
         })
         Modal.confirm({
             title:"删除提示",
@@ -169,10 +182,7 @@ export default class basicTable extends Component {
             onChange:(selectedRowKeys,selectedRows)=>{
                 let ids = [];
                 console.log(selectedRows)
-                selectedRows.map((item)=>{
-                   ids.push(item.id); 
-
-                })
+                selectedRows.map((item)=>ids.push(item.id))
                 this.setState({
                     selectedRowKeys,
                     selectedRows,
@@ -235,7 +245,7 @@ export default class basicTable extends Component {
                           }}
                         columns={columns}
                         dataSource={this.state.dataSource2}
-                       
+                        pagination={this.state.pagination}
                     >
                     </Table>
                 </Card>

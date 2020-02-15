@@ -7,6 +7,7 @@ import Detail from './pages/detail'
 import Buttons from './pages/ui/buttons'
 import NoMatch from './pages/nomatch';
 import basicTable from './pages/table/basicTable';
+import highTable from './pages/table/highTable';
 
 
 export default class IRouter extends React.Component{
@@ -22,6 +23,7 @@ export default class IRouter extends React.Component{
                             <Switch>
                             <Route path="/admin/ui/buttons" component={Buttons}></Route>
                             <Route path="/admin/table/basic" component={basicTable}></Route>
+                            <Route path="/admin/table/high" component={highTable}></Route>
                             <Route component={NoMatch}></Route>
                             </Switch>
                         </Admin>
