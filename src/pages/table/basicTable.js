@@ -66,7 +66,7 @@ export default class basicTable extends Component {
                         console.log(this)
                         //to-do
                         _this.params.page = current
-                        this.params.page=current 
+                        //this.params.page=current 
                         this.request()
                     })
 
