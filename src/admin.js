@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import NavLeft from './components/NavLeft';
 import './style/common.less'
 
-export default class admin extends Component {
+export default class Admin extends Component {
     render() {
         return (
             <Row className="container">

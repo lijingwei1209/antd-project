@@ -2,13 +2,16 @@ import React from 'react';
 import { HashRouter, Route, Switch} from 'react-router-dom';
 import App from './App'
 import Login from './pages/login';
-import Admin from './admin';
+import Admin from './Admin';
 import Detail from './pages/detail'
 import Buttons from './pages/ui/buttons'
 import NoMatch from './pages/nomatch';
 import basicTable from './pages/table/basicTable';
 import highTable from './pages/table/highTable';
 import City from './pages/city/City'
+import Order from './pages/order';
+
+import Common from './common'
 
 
 export default class IRouter extends React.Component{
@@ -26,11 +29,18 @@ export default class IRouter extends React.Component{
                             <Route path="/admin/table/basic" component={basicTable}></Route>
                             <Route path="/admin/table/high" component={highTable}></Route>
                             <Route path="/admin/city" component={City}></Route>
+                            <Route path="/admin/order" component={Order}></Route>
                             <Route component={NoMatch}></Route>
                             </Switch>
                         </Admin>
+                    }>
+                    </Route>
+                    <Route path="/common" render={()=>
+                       <Common>
+                           <Route path="/common/order/detail/:orderId" component={Detail}>
+                           </Route>
+                       </Common>
                     }></Route>
-                    <Route path="/detail" component={Detail}></Route>
                 </App>
             </HashRouter>
         )

@@ -13,10 +13,10 @@ export default{
                 callback(current)
             },
             current:data.result.page,
-            pageSize:data.result.pageSize,
-            total:data.result.total,
+            pageSize:data.result.page_size,
+            total:data.result.total_count,
             showTotal:(total,range)=>{
-                return  `共${data.result.total}条`
+                return  `共${data.result.total_count}条`
             },
             showQuickJumper:true
         }
