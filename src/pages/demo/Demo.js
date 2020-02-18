@@ -50,16 +50,11 @@ export default class Demo extends Component {
     }
     
     sortFun=(a,b)=>{
-        if(!a || !b){
-            return
-        }
+        // if(!a || !b){
+        //     return
+        // }
         if((typeof a)!== "number"){
-            if(new Date(a) instanceof Date){
-                return new Date(a).getTime()-new Date(b).getTime();
-            }else{
-                console.log(a,b)
-                return a.chinese.localeCompare(b.chinese, 'zh')
-            }
+            return new Date(a) instanceof Date ? new Date(a).getTime() - new Date(b).getTime() : a.chinese.localeCompare(b.chinese, 'zh')
         }else{
             console.log(typeof(a) ,a,b,a-b)
             return a-b
