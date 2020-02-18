@@ -44,7 +44,7 @@ export default class Demo extends Component {
             sortOrder:sorter.order
         })
      } */
-    /*  sorter=(key)=>{
+     sorter=(key)=>{
         return (rowa,rowb)=> this.sortFun(rowa[key],rowb[key])
     }
     
@@ -55,7 +55,7 @@ export default class Demo extends Component {
         if((typeof a)!== "number"){
            return a.chinese.localeCompare(b.chinese, 'zh')
         }
-    } */
+    }
 
     render() {
         const columns=[
@@ -73,25 +73,25 @@ export default class Demo extends Component {
                     return a.schoolName-b.schoolName
                 },
                 sortOrder:this.state.sortOrder */
-                sorter:utils.sorter('schoolName'),
-                //sorter:this.sorter('timeStamp')
+                //sorter:utils.sorter('schoolName'),
+                sorter:this.sorter('timeStamp')
             },
             {
                 title:"更新时间",
                 dataIndex:"timeStamp",
-                sorter:utils.sorter('timeStamp')
+                sorter:this.sorter('timeStamp')
             },
             {
                 title:"排课数",
                 dataIndex:"totalClassNum",
                 width:80,
-                sorter:utils.sorter('totalClassNum')
+                sorter:this.sorter('totalClassNum')
             },
             {
                 title:"正在上课数",
                 width:120,
                 dataIndex:"totalAttendNum",
-                sorter:utils.sorter('totalAttendNum')
+                sorter:this.sorter('totalAttendNum')
             }
         ]
         return (
@@ -101,7 +101,7 @@ export default class Demo extends Component {
                     columns={columns}
                     dataSource={this.state.dataSource}
                     pagination={false}
-                    onChange={this.handleChange}
+                   // onChange={this.handleChange}
                 ></Table>
             </Card>
         )

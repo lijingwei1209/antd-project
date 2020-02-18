@@ -42,7 +42,7 @@ export default{
             return
         }
         if((typeof a)!== "number"){
-           return a.chinese.localeCompare(b.chinese, 'zh')
+           return a.localeCompare(b.chinese, 'zh')
         }
     }
 }
