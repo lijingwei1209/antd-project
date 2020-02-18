@@ -12,6 +12,7 @@ import City from './pages/city/City'
 import Order from './pages/order';
 
 import Common from './common'
+import Demo from './pages/demo/Demo';
 
 
 export default class IRouter extends React.Component{
@@ -38,6 +39,8 @@ export default class IRouter extends React.Component{
                     <Route path="/common" render={()=>
                        <Common>
                            <Route path="/common/order/detail/:orderId" component={Detail}>
+                           </Route>
+                           <Route path="/common/demo" component={Demo}>
                            </Route>
                        </Common>
                     }></Route>
