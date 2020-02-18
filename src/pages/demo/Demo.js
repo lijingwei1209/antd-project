@@ -14,6 +14,11 @@ export default class Demo extends Component {
         page:1
     }
     componentDidMount(){
+        var arr =[33,0,3,1,6,19,20];
+        arr.sort(function(a,b){
+            return a-b
+        })
+        console.log(arr)
         this.request();
     }
 
@@ -28,23 +33,19 @@ export default class Demo extends Component {
          }).then((res)=>{
              console.log("res",res)
              let list = res.allSchoolInfos.map((item,index)=>{
-                 item.key = index;
+                 item.key = index+1;
                  return item;
              })
+             const totalList = list.length>0?[...list,{key:'合计',...res.totalInfo}]:[]
+             console.log(list)
              this.setState({
-                dataSource: list
+                dataSource: totalList
             })
             
          })
      }
-     //排序
-   /*   handleChange=(pagination, filters, sorter,)=>{
-         console.log("===",sorter)
-        this.setState({
-            sortOrder:sorter.order
-        })
-     } */
-     sorter=(key)=>{
+
+    sorter=(key)=>{
         return (rowa,rowb)=> this.sortFun(rowa[key],rowb[key])
     }
     
@@ -53,7 +54,15 @@ export default class Demo extends Component {
             return
         }
         if((typeof a)!== "number"){
-           return a.chinese.localeCompare(b.chinese, 'zh')
+            if(new Date(a) instanceof Date){
+                return new Date(a).getTime()-new Date(b).getTime();
+            }else{
+                console.log(a,b)
+                return a.chinese.localeCompare(b.chinese, 'zh')
+            }
+        }else{
+            console.log(typeof(a) ,a,b,a-b)
+            return a-b
         }
     }
 
@@ -62,19 +71,20 @@ export default class Demo extends Component {
             {
                 title:'id',
                 dataIndex:'key',
-                width:80
-
+                width:80,
+                render: (text, record, index) => {
+                    if (record.key == '合计') {
+                      return text;  
+                  }else{
+                      return index++
+                  }
+                }
             },
             {
                 title:"机构",
                 dataIndex:'schoolName',
                 width:100,
-               /*  sorter:(a,b)=>{
-                    return a.schoolName-b.schoolName
-                },
-                sortOrder:this.state.sortOrder */
-                //sorter:utils.sorter('schoolName'),
-                sorter:this.sorter('timeStamp')
+                sorter:this.sorter('schoolName'),
             },
             {
                 title:"更新时间",
@@ -101,7 +111,7 @@ export default class Demo extends Component {
                     columns={columns}
                     dataSource={this.state.dataSource}
                     pagination={false}
-                   // onChange={this.handleChange}
+                    footer={this.handlefooter}
                 ></Table>
             </Card>
         )
