@@ -11,7 +11,7 @@ export default class admin extends Component {
             <Row className="simple-page">
                 <Header menuType="second"></Header>
             </Row>
-            <Row class="content">
+            <Row className="content">
                 {this.props.children}
             </Row>
             </div>
